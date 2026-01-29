@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AWS HealthOmics Genomic Pipeline</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #1a1b26 0%, #24283b 100%);
+      min-height: 100vh;
+      color: #a9b1d6;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #7aa2f7;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      color: #565f89;
+      font-size: 1rem;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .theme-btn {
+      padding: 0.5rem 1rem;
+      border: 1px solid #3d59a1;
+      background: #292e42;
+      color: #a9b1d6;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 0.875rem;
+    }
+
+    .theme-btn:hover {
+      background: #3d59a1;
+      color: #fff;
+    }
+
+    .theme-btn.active {
+      background: #7aa2f7;
+      color: #1a1b26;
+      border-color: #7aa2f7;
+    }
+
+    .diagram-container {
+      background: #1a1b26;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+      overflow-x: auto;
+    }
+
+    .diagrams-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .diagram-wrapper {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .diagram-label {
+      text-align: center;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #7aa2f7;
+      margin-bottom: 1rem;
+      padding: 0.5rem;
+      background: rgba(122, 162, 247, 0.1);
+      border-radius: 6px;
+    }
+
+    .diagram-box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 300px;
+    }
+
+    .diagram-box svg {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .loading {
+      color: #565f89;
+      font-size: 1.125rem;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 2rem;
+      color: #565f89;
+      font-size: 0.75rem;
+    }
+
+    footer a {
+      color: #7aa2f7;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>AWS HealthOmics Genomic Pipeline</h1>
+      <p class="subtitle">Whole Genome Sequencing Analysis Architecture</p>
+    </header>
+
+    <div class="controls">
+      <button class="theme-btn active" data-theme="tokyo-night">Tokyo Night</button>
+      <button class="theme-btn" data-theme="catppuccin-mocha">Catppuccin</button>
+      <button class="theme-btn" data-theme="nord">Nord</button>
+      <button class="theme-btn" data-theme="dracula">Dracula</button>
+      <button class="theme-btn" data-theme="github-light">GitHub Light</button>
+    </div>
+
+    <div class="diagrams-grid">
+      <div class="diagram-wrapper">
+        <div class="diagram-label">beautiful-mermaid</div>
+        <div class="diagram-container">
+          <div id="diagram-beautiful" class="diagram-box">
+            <span class="loading">Loading...</span>
+          </div>
+        </div>
+      </div>
+      <div class="diagram-wrapper">
+        <div class="diagram-label">mermaid.js (original)</div>
+        <div class="diagram-container">
+          <div id="diagram-mermaid" class="diagram-box">
+            <span class="loading">Loading...</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
