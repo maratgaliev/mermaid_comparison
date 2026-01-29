@@ -133,6 +133,47 @@
     footer a:hover {
       text-decoration: underline;
     }
+
+    .export-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .export-btn {
+      padding: 0.4rem 0.8rem;
+      border: 1px solid #3d59a1;
+      background: #1f2335;
+      color: #a9b1d6;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 0.75rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .export-btn:hover:not(:disabled) {
+      background: #3d59a1;
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    .export-btn:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    .export-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .export-btn .icon {
+      font-size: 0.875rem;
+    }
   </style>
 </head>
 <body>
@@ -153,6 +194,14 @@
     <div class="diagrams-grid">
       <div class="diagram-wrapper">
         <div class="diagram-label">beautiful-mermaid</div>
+        <div class="export-buttons">
+          <button class="export-btn" data-diagram="beautiful" data-format="svg">
+            <span class="icon">↓</span> SVG
+          </button>
+          <button class="export-btn" data-diagram="beautiful" data-format="png">
+            <span class="icon">↓</span> PNG
+          </button>
+        </div>
         <div class="diagram-container">
           <div id="diagram-beautiful" class="diagram-box">
             <span class="loading">Loading...</span>
@@ -161,6 +210,14 @@
       </div>
       <div class="diagram-wrapper">
         <div class="diagram-label">mermaid.js (original)</div>
+        <div class="export-buttons">
+          <button class="export-btn" data-diagram="mermaid" data-format="svg">
+            <span class="icon">↓</span> SVG
+          </button>
+          <button class="export-btn" data-diagram="mermaid" data-format="png">
+            <span class="icon">↓</span> PNG
+          </button>
+        </div>
         <div class="diagram-container">
           <div id="diagram-mermaid" class="diagram-box">
             <span class="loading">Loading...</span>
