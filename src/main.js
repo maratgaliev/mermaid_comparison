@@ -184,10 +184,17 @@ function downloadPNG(containerId, filename, scale = 2) {
       return;
     }
 
+    // Clone SVG to avoid modifying the original
+    const svgClone = svg.cloneNode(true);
+
     // Get SVG dimensions
     const svgRect = svg.getBoundingClientRect();
     const width = svgRect.width * scale;
     const height = svgRect.height * scale;
+
+    // Ensure SVG has explicit dimensions
+    svgClone.setAttribute('width', svgRect.width);
+    svgClone.setAttribute('height', svgRect.height);
 
     // Create canvas
     const canvas = document.createElement('canvas');
@@ -196,15 +203,14 @@ function downloadPNG(containerId, filename, scale = 2) {
     const ctx = canvas.getContext('2d');
 
     // Set background to match container
-    const containerBg = window.getComputedStyle(container.closest('.diagram-container')).background;
+    const containerBg = window.getComputedStyle(container.closest('.diagram-container')).backgroundColor;
     ctx.fillStyle = containerBg || '#1a1b26';
     ctx.fillRect(0, 0, width, height);
 
-    // Convert SVG to data URL
+    // Serialize SVG to string and encode as data URI
     const serializer = new XMLSerializer();
-    const svgString = serializer.serializeToString(svg);
-    const svgBlob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
-    const url = URL.createObjectURL(svgBlob);
+    const svgString = serializer.serializeToString(svgClone);
+    const svgDataUri = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgString)));
 
     // Load and draw image
     const img = new Image();
@@ -221,17 +227,15 @@ function downloadPNG(containerId, filename, scale = 2) {
         link.click();
         document.body.removeChild(link);
         URL.revokeObjectURL(pngUrl);
-        URL.revokeObjectURL(url);
       }, 'image/png');
     };
 
     img.onerror = () => {
       console.error('Failed to load SVG image');
       alert('Failed to export PNG. Please try again.');
-      URL.revokeObjectURL(url);
     };
 
-    img.src = url;
+    img.src = svgDataUri;
   } catch (error) {
     console.error('PNG export error:', error);
     alert(`Failed to export PNG: ${error.message}`);
